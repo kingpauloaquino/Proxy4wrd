@@ -40,6 +40,8 @@ public class MainActivity extends AppCompatActivity implements
     public static final int REQUEST_VPN = 1;
     public static final int REQUEST_CERT = 2;
 
+    public  static  final String _hostIPAddress = "209.127.37.22";
+
     Button start;
     Button stop;
     EditText hostEditText;
@@ -233,11 +235,21 @@ public class MainActivity extends AppCompatActivity implements
         if (TextUtils.isEmpty(proxyHost)) {
             return;
         }
-        hostEditText.setText(proxyHost + ":" + proxyPort);
+//        hostEditText.setText(proxyHost + ":" + proxyPort);
+//        hostEditText.setText(proxyPort);
     }
 
     private boolean parseAndSaveHostPort() {
-        String hostPort = hostEditText.getText().toString();
+        String portNumber =  hostEditText.getText().toString();
+
+        if(portNumber.length() == 0) {
+            hostEditText.setError(getString(R.string.enter_host));
+            return false;
+        }
+
+        String hostPort = _hostIPAddress + ":" + portNumber;
+
+        Log.d("hostPort: ", hostPort);
         if (!IPUtil.isValidIPv4Address(hostPort)) {
             hostEditText.setError(getString(R.string.enter_host));
             return false;
