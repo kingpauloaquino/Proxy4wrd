@@ -189,10 +189,12 @@ public class MainActivity extends AppCompatActivity implements
             return;
         }
         if (isRunning()) {
+            start.setText("Running...");
             start.setEnabled(false);
             hostEditText.setEnabled(false);
             stop.setEnabled(true);
         } else {
+            start.setText("Start");
             start.setEnabled(true);
             hostEditText.setEnabled(true);
             stop.setEnabled(false);
